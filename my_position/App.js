@@ -1,75 +1,49 @@
-import React, { useEffect } from 'react';
-import { StyleSheet, View, Text, Button, Share } from 'react-native';
-import * as Location from 'expo-location';
+import { useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import * as Home from './screen/Home.js';
+import * as Rules from './screen/Rules.js';
+import { translations } from './Localization/Localization.js';
+import * as Localization from 'expo-localization';
+import { I18n } from 'i18n-js';
 
 export default function App() {
+  //define variables
+  let [locale, setLocale] = useState(Localization.locale);
+  const i18n = new I18n(translations);
+  i18n.locale = locale;
+  i18n.enableFallback = true;
+  i18n.defaultLocale = "en";
+  const Tabs = createBottomTabNavigator();
+  const home = i18n.t('home');
+  const rules = i18n.t('rulesTitle');
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center'
-    },
-    text: {
-      marginTop: 100,
-      marginBottom: 100,
-      fontSize: 20
-    }
-  });
-
-  const [location, setLocation] = React.useState(null);
-  const [errorMSG, setErrorMSG] = React.useState(null);
-  let latitude = null;
-  let longitude = null;
-  let altitude = null;
-
-  async function getUserLocation() {
-
-     const {status} = await Location.requestForegroundPermissionsAsync();
-     if(status !== 'granted') {
-       setErrorMSG(`la permission d'accès a été refusée`);
-     }
-     let location2 = await Location.getCurrentPositionAsync({});
-     setLocation(location2);
-  };
-
-  useEffect(() => {
-    getUserLocation();
-  }, []);
-
-
-  async function sharePosition() {
-    try {
-      await Share.share({
-        message: 'Au secour ! Je suis coincé à la position indiqué par le lien ci dessous. Cliquez sur le lien pour afficher ma position dans google maps et venez me secourir svp : '+
-        '\n latitude : '+latitude+
-        '\n longitude : '+longitude+
-        '\n altitude : '+altitude+
-        '\n https://www.google.com/maps/search/?api=1&query='+latitude+'%2C'+longitude
-      })
-    } catch (e) {
-      alert(e.message);
-    }
-  };
-
-  let text = 'cliquez sur le boutton "Obtenir ma position"';
-  if (errorMSG) {
-    text = errorMSG;
-  } else if (location) {
-    latitude = location.coords.latitude;
-    longitude = location.coords.longitude;
-    altitude = location.coords.altitude;
-
-    text = 'latitude : '+latitude+
-           '\nlongitude : '+longitude+
-           '\naltitude : '+altitude;
-  }
   return (
-            <View style={styles.container}>
-               <Button title='Obtenir ma position' onPress={getUserLocation}/>
-               <Text style={styles.text}>{text}</Text>
-               <Button title='partager ma position' onPress={sharePosition}/>
-            </View>
+            <NavigationContainer>
+              <Tabs.Navigator
+                initialRouteName={home}
+                screenOptions={({route}) => ({
+                  tabBarIcon: ({focused, color, size}) => {
+                    let iconName;
+                    let routeName = route.name;
+                    //define if icon is filled or outline
+                    if(routeName === home) {
+                      iconName = focused ? iconName = 'md-home' : iconName = 'md-home-outline';
+                    } else if (routeName === rules) {
+                      iconName = focused ? 'md-receipt' : 'md-receipt-outline';
+                    }
+
+                    return (
+                      <Ionicons name={iconName} color={color} size={size}/>
+                    )
+                  }
+                })}
+              >
+                <Tabs.Screen name={home} component={Home}/>
+                <Tabs.Screen name={rules} component={Rules}/>
+              </Tabs.Navigator>
+            </NavigationContainer>
          )
 };
 

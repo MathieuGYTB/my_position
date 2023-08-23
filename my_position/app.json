@@ -1,5 +1,6 @@
 {
   "expo": {
+    "owner": "MG_Production",
     "name": "my_position",
     "slug": "my_position",
     "version": "1.0.0",
@@ -25,6 +26,9 @@
     },
     "web": {
       "favicon": "./assets/location.jpg"
-    }
+    },
+    "plugins": [
+      "expo-localization"
+    ]
   }
 }
