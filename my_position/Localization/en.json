@@ -1,0 +1,13 @@
+{
+  "latitude": "latitude",
+  "longitude": "longitude",
+  "altitude": "altitude",
+  "addPosition": "Add my position",
+  "click": "Click on the button",
+  "sharePosition": "Share my position",
+  "home": "Home",
+  "rulesTitle": "Privacy rules",
+  "permission": "access permission has been denied",
+  "message": "Help ! I am stuck at the position indicated by the link below. Click on the link to display my position in google maps and come and help me please : ",
+  "rules": "This application uses your location data for the operation of the application. This data is neither stored nor shared by us with third parties. The data is shared by you yourself to the people of your choice when you use the application"
+}

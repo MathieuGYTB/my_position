@@ -1,9 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 import { StyleSheet, View, Text, Button, Share } from 'react-native';
 import * as Location from 'expo-location';
-
+import i18n from '../i18n.js';
 export default function Home() {
-//define styles
+  //define styles
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -29,7 +29,7 @@ export default function Home() {
 
      const {status} = await Location.requestForegroundPermissionsAsync();
      if(status !== 'granted') {
-       setErrorMSG(i18n.t('permission'));
+       setErrorMSG(i18n('permission'));
      }
      let location2 = await Location.getCurrentPositionAsync({});
      setLocation(location2);
@@ -39,10 +39,10 @@ export default function Home() {
   async function sharePosition() {
     try {
       await Share.share({
-        message: i18n.t('message')+
-        '\n latitude : '+latitude+
-        '\n longitude : '+longitude+
-        '\n altitude : '+altitude+
+        message: i18n('message')+
+        '\n'+i18n('latitude')+' : '+latitude+
+        '\n'+i18n('longitude')+' : '+longitude+
+        '\n'+i18n('altitude')+' : '+altitude+
         '\n https://www.google.com/maps/search/?api=1&query='+latitude+'%2C'+longitude
       })
     } catch (e) {
@@ -51,24 +51,24 @@ export default function Home() {
   };
 
   //define the variable text
-  let text = i18n.t('click')+  i18n.t('addPosition');
+  let text = i18n('click')+' "'+i18n('addPosition')+'"';
   if (errorMSG) {
-    text = i18n.t('permission');
+    text = i18n('permission');
   } else if (location) {
     latitude = location.coords.latitude;
     longitude = location.coords.longitude;
     altitude = location.coords.altitude;
 
-    text = 'latitude : '+latitude+
-           '\nlongitude : '+longitude+
-           '\naltitude : '+altitude;
+    text = i18n('latitude')+' : '+latitude+
+           '\n'+i18n('longitude')+': '+longitude+
+           '\n'+i18n('altitude')+' : '+altitude;
   }
 
   return (
               <View style={styles.container}>
-                 <Button title={i18n.t('addPosition')} onPress={getUserLocation}/>
+                 <Button title={i18n('addPosition')} onPress={getUserLocation}/>
                  <Text style={styles.text}>{text}</Text>
-                 <Button title={i18n.t('sharePosition')} onPress={sharePosition}/>
+                 <Button title={i18n('sharePosition')} onPress={sharePosition}/>
               </View>
            )
   };

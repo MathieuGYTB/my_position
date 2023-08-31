@@ -1,23 +1,16 @@
-import { useState } from 'react';
+import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import * as Home from './screen/Home.js';
-import * as Rules from './screen/Rules.js';
-import { translations } from './Localization/Localization.js';
-import * as Localization from 'expo-localization';
-import { I18n } from 'i18n-js';
+import Home from './screen/Home.js';
+import Rules from './screen/Rules.js';
+import i18n from './i18n.js';
 
 export default function App() {
   //define variables
-  let [locale, setLocale] = useState(Localization.locale);
-  const i18n = new I18n(translations);
-  i18n.locale = locale;
-  i18n.enableFallback = true;
-  i18n.defaultLocale = "en";
   const Tabs = createBottomTabNavigator();
-  const home = i18n.t('home');
-  const rules = i18n.t('rulesTitle');
+  const home = i18n('home');
+  const rules = i18n('rulesTitle');
 
   return (
             <NavigationContainer>

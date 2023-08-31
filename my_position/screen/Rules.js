@@ -1,11 +1,11 @@
 import { View, Text } from 'react-native';
-
-export  default function Rules() {
+import i18n from '../i18n.js';
+export default function Rules() {
   return (
     <View style={{margin: 20}}>
-      <Text style={{fontSize: 20, fontWeight: "bold"}}>{i18n.t('rulesTitle')} :</Text>
+      <Text style={{fontSize: 20, fontWeight: "bold"}}>{i18n('rulesTitle')} :</Text>
       <Text>
-        {i18n.t('rules')}
+        {i18n('rules')}
       </Text>
     </View>
   )

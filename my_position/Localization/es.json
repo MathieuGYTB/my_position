@@ -1,0 +1,13 @@
+{
+  "latitude":"latitud",
+  "longitude":"longitud",
+  "altitude":"altitud",
+  "addPosition": "Obtener mi ubicación",
+  "click": "clic en el botón",
+  "sharePosition": "Compartir mi ubicación",
+  "home": "Inicio",
+  "rulesTitle": "Reglas de confidencialidad",
+  "permission": "Se ha denegado el permiso de acceso",
+  "message": "Ayuda ! Estoy atascado en la posición indicada en el siguiente enlace. Haz clic en el enlace para ver mi posición en google maps y ven a ayudarme por favor : ",
+  "rules": "Esta aplicación utiliza sus datos de ubicación para el funcionamiento de la aplicación. Estos datos no los almacenamos ni los compartimos con terceros. Usted mismo comparte los datos con las personas que elija cuando utiliza la aplicación."
+}
