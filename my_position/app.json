@@ -1,14 +1,14 @@
 {
   "expo": {
-    "owner": "MG_Production",
-    "name": "my_position",
-    "slug": "my_position",
+    "owner": "mg_production",
+    "name": "my position",
+    "slug": "my-position",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/location.jpg",
+    "icon": "./assets/location.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/location.jpg",
+      "image": "./assets/location.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -20,15 +20,21 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/location.jpg",
+        "foregroundImage": "./assets/location.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.mg_production.myposition"
     },
     "web": {
-      "favicon": "./assets/location.jpg"
+      "favicon": "./assets/location.png"
     },
     "plugins": [
       "expo-localization"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "c7ead926-a6f3-4db9-80ef-3596f30d421c"
+      }
+    }
   }
 }
