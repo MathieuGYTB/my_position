@@ -3,7 +3,7 @@
     "owner": "mg_production",
     "name": "my position",
     "slug": "my-position",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/ic_launcher.png",
     "userInterfaceStyle": "light",
@@ -23,18 +23,31 @@
         "foregroundImage": "./assets/ic_launcher.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.mg_production.myposition"
+      "package": "com.mg_production.myposition",
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/ic_launcher.png"
     },
     "plugins": [
-      "expo-localization"
+      "expo-localization",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "extraProguardRules": "-keep class com.google.android.gms.internal.consent_sdk.** { *; }"
+          }
+        }
+      ]
     ],
     "extra": {
       "eas": {
         "projectId": "c7ead926-a6f3-4db9-80ef-3596f30d421c"
       }
     }
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-7771306695979114~3792830459",
+    "delay_app_measurement_init": true
   }
 }
