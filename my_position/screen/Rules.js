@@ -19,7 +19,7 @@ export default function Rules() {
             try {
               const value = await AsyncStorage.getItem('docId');
               if (value !== null) {
-                // value previously store
+
                await setDocId(value);
                const docRefId = await doc(firestore, "UsersConsent", docId);
                await setDocRef(docRefId);
@@ -28,7 +28,7 @@ export default function Rules() {
               }
 
             } catch (e) {
-              // error reading value
+              console.error(e);
             }
           };
     //call the docIds function
@@ -39,7 +39,7 @@ export default function Rules() {
   async function showForm() {
       await AdsConsent.showForm();
       const {storeAndAccessInformationOnDevice} = await AdsConsent.getUserChoices();
-      console.log(storeAndAccessInformationOnDevice);
+
 
       let d = new Date();
       let date = d.toString();
