@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { ScrollView, View, Text, StyleSheet, Button } from 'react-native';
 import i18n from '../i18n.js';
 import { AdsConsent } from 'react-native-google-mobile-ads';

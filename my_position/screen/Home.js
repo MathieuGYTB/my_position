@@ -35,7 +35,7 @@ function Home() {
              setDocId(value);
 
             } else {
-
+              console.log('they is not doc id for now');
             }
           } catch (e) {
             // error reading value
@@ -228,6 +228,7 @@ function Home() {
                 await AsyncStorage.setItem('docId', value);
                } catch (e) {
                 // saving error
+                console.error(e);
                 }
               }
             storeData(name.trim()+' '+firstname.trim()+' '+ipAddress);
