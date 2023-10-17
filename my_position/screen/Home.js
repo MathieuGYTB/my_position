@@ -65,7 +65,11 @@ function Home() {
         if (consentInfo.current.isConsentFormAvailable && consentInfo.current.status === AdsConsentStatus.REQUIRED) {
 
           const formResult = await AdsConsent.showForm();
-          const {storeAndAccessInformationOnDevice} = await AdsConsent.getUserChoices();
+
+           //AdsConsent.reset();
+        }
+
+        const {storeAndAccessInformationOnDevice} = await AdsConsent.getUserChoices();
 
 
           //verify the store and acces device info status (true or false)
