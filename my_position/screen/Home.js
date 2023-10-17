@@ -66,9 +66,6 @@ function Home() {
 
           const formResult = await AdsConsent.showForm();
 
-        } else {
-           console.log('consent info is already obtain');
-           //function to clear the ads consent. uncomment if you need it
            //AdsConsent.reset();
         }
 
