@@ -10,7 +10,7 @@ import * as Network from 'expo-network';
 
 function Home() {
     //define variables and state
-    const adUnitId =  __DEV__ ? TestIds.GAM_BANNER : "ca-app-pub-7771306695979114/8272761826";
+    const adUnitId = __DEV__ ? TestIds.BANNER : "ca-app-pub-7771306695979114/8272761826";
     const [location, setLocation] = React.useState(null);
     const [errorMSG, setErrorMSG] = React.useState(null);
     const [modalVisible, setModalVisible] = useState(true);
@@ -32,7 +32,7 @@ function Home() {
             const value = await AsyncStorage.getItem('docId');
             if (value !== null) {
               // value previously store
-             setDocId(value);
+              setDocId(value);
 
             } else {
               console.log('they is not doc id for now');
@@ -62,19 +62,23 @@ function Home() {
 
       if (consentInfo.current.isConsentFormAvailable !== undefined && consentInfo.current.status !== undefined) {
 
-       if (consentInfo.current.isConsentFormAvailable && consentInfo.current.status === AdsConsentStatus.REQUIRED) {
+        if (consentInfo.current.isConsentFormAvailable && consentInfo.current.status === AdsConsentStatus.REQUIRED) {
 
           const formResult = await AdsConsent.showForm();
           const {storeAndAccessInformationOnDevice} = await AdsConsent.getUserChoices();
 
+
           //verify the store and acces device info status (true or false)
           if (storeAndAccessInformationOnDevice === false) {
+
               setConsent(false);
                 /**
                 * The user declined consent for purpose 1,
                 * the Google Mobile Ads SDK won't serve ads.
                 */
+
           } else if (storeAndAccessInformationOnDevice === true) {
+
 
             //modify consent variable state
             setConsent(true);
@@ -92,6 +96,7 @@ function Home() {
             })
             //initialize the mobile ads
             mobileAds().initialize();
+
           } else if (storeAndAccessInformationOnDevice === undefined ) {
               console.log('store access status is undefined');
           } else if (storeAndAccessInformationOnDevice === null) {
@@ -101,7 +106,6 @@ function Home() {
           console.log('consent info is already obtain');
           //function to clear the ads consent. uncomment if you need it
           //AdsConsent.reset();
-
        }
       } else {
           console.log('consent info undefined');
@@ -203,9 +207,10 @@ function Home() {
           setModalVisible(!modalVisible)
 
           //define variables
-          let d = new Date()
-          let date = d.toString()
+          let d = new Date();
+          let date = d.toString();
           const ipAddress = await Network.getIpAddressAsync();
+
           //function to push the datas in in firebase firestore
           async function pushData() {
 
