@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { ScrollView, View, Text, StyleSheet, Button } from 'react-native';
 import i18n from '../i18n.js';
 import { AdsConsent } from 'react-native-google-mobile-ads';
@@ -9,37 +9,29 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function Rules() {
 
   //define variables
-  const [docId, setDocId] = React.useState();
-  const [docRef, setDocRef] = React.useState();
+  const [docR, setDocR] = useState();
 
-  //function to get docId from async storage
-  useEffect(() => {
+  async function getDocId () {
+    try {
+      const docId = await AsyncStorage.getItem('docId');
 
-    const docIds = async () => {
-            try {
-              const value = await AsyncStorage.getItem('docId');
-              if (value !== null) {
+      if (docId !== null) {
+        const docRef = await doc(firestore, "UsersConsent", docId);
+        await setDocR(docRef);
 
-               await setDocId(value);
-               const docRefId = await doc(firestore, "UsersConsent", docId);
-               await setDocRef(docRefId);
-              } else {
-              console.log('there is not doc id in storage');
-              }
-
-            } catch (e) {
-              console.error(e);
-            }
-          };
-    //call the docIds function
-    docIds();
-  }, []);
-
+      } else {
+        console.log('pas de doc id');
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  getDocId();
   //function to show form and add user consent status
   async function showForm() {
+
       await AdsConsent.showForm();
       const {storeAndAccessInformationOnDevice} = await AdsConsent.getUserChoices();
-
 
       let d = new Date();
       let date = d.toString();
@@ -48,7 +40,7 @@ export default function Rules() {
          date: date,
          consent: storeAndAccessInformationOnDevice
       }
-      updateDoc(docRef, { userConsent: arrayUnion(userConsents)});
+      updateDoc(docR, { userConsent: arrayUnion(userConsents)});
   };
 
   //define css styles
