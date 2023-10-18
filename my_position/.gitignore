@@ -34,3 +34,6 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# divers
+my-position-397716-92a1517e611a.json
