@@ -66,6 +66,9 @@ function Home() {
 
           const formResult = await AdsConsent.showForm();
 
+        } else {
+           console.log('consent info is already obtain');
+           //function to clear the ads consent. uncomment if you need it
            //AdsConsent.reset();
         }
 
@@ -73,7 +76,7 @@ function Home() {
 
 
           //verify the store and acces device info status (true or false)
-          if (storeAndAccessInformationOnDevice === false) {
+        if (storeAndAccessInformationOnDevice === false) {
 
               setConsent(false);
                 /**
@@ -81,8 +84,7 @@ function Home() {
                 * the Google Mobile Ads SDK won't serve ads.
                 */
 
-          } else if (storeAndAccessInformationOnDevice === true) {
-
+        } else if (storeAndAccessInformationOnDevice === true) {
 
             //modify consent variable state
             setConsent(true);
@@ -101,16 +103,14 @@ function Home() {
             //initialize the mobile ads
             mobileAds().initialize();
 
-          } else if (storeAndAccessInformationOnDevice === undefined ) {
+        } else if (storeAndAccessInformationOnDevice === undefined ) {
               console.log('store access status is undefined');
-          } else if (storeAndAccessInformationOnDevice === null) {
+        } else if (storeAndAccessInformationOnDevice === null) {
               console.log('store access status is null');
-          }
-       } else {
-          console.log('consent info is already obtain');
-          //function to clear the ads consent. uncomment if you need it
-          //AdsConsent.reset();
-       }
+        } else {
+              console.log('on ne sait pas');
+        }
+
       } else {
           console.log('consent info undefined');
           const formResult = await AdsConsent.showForm();
