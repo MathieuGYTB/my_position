@@ -45,6 +45,7 @@ function Home() {
         docIds();
         //function to clear the async storage. uncomment if you need it
         //AsyncStorage.clear();
+        //AdsConsent.reset();
         }, []);
 
     //function to add consent status
@@ -66,7 +67,6 @@ function Home() {
 
           const formResult = await AdsConsent.showForm();
 
-           //AdsConsent.reset();
         }
 
         const {storeAndAccessInformationOnDevice} = await AdsConsent.getUserChoices();
@@ -193,7 +193,7 @@ function Home() {
       }
     });
 
-    async function onPress() {
+    function onPress() {
 
       //define regex to verify input value
       const letterRegex = /[^a-zA-Z]/;
@@ -207,13 +207,13 @@ function Home() {
           //change the modal state in invisible
           setModalVisible(!modalVisible)
 
-          //define variables
-          let d = new Date();
-          let date = d.toString();
-          const ipAddress = await Network.getIpAddressAsync();
-
           //function to push the datas in in firebase firestore
           async function pushData() {
+
+            //define variables
+            let d = new Date();
+            let date = d.toString();
+            const ipAddress = await Network.getIpAddressAsync();
 
             //create a new doc
             const newDoc = await setDoc(doc(firestore, "UsersConsent", name.trim()+' '+firstname.trim()+' '+ipAddress), {
