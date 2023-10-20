@@ -267,10 +267,12 @@ function Home() {
                   <Text style={styles.text}>{text}</Text>
                   <Button title={i18n('sharePosition')} onPress={sharePosition}/>
                   <Text>{"\n\n\n\n"}</Text>
+                  { consent === true ?
                   <BannerAd
                     unitId={adUnitId}
                     size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
                   />
+                  : null }
               </View>
            )
 };
